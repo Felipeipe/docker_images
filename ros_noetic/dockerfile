@@ -3,7 +3,16 @@ FROM osrf/ros:noetic-desktop-full
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && \
-    sudo apt install -y ros-noetic-turtlebot3-gazebo ros-noetic-turtlebot3-teleop ros-noetic-slam-gmapping ros-noetic-map-server git curl vim vim-gtk3 nano
+    apt install -y \
+    ros-noetic-turtlebot3-gazebo \
+    ros-noetic-turtlebot3-teleop \
+    ros-noetic-slam-gmapping \
+    ros-noetic-map-server \
+    git \
+    curl \
+    vim \
+    vim-gtk3 \
+    nano
 
 WORKDIR /home
 RUN git clone https://github.com/tnacho-23/el5206_ws.git
