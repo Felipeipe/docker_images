@@ -11,6 +11,6 @@ services:
       - QT_X11_NO_MITSHM=1
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
-      - ${HOME}/el5206_ws:/home/el5206_ws:rw
+        #- ${HOME}/el5206_ws:/home/el5206_ws:rw
     stdin_open: true
     tty: true

@@ -15,7 +15,7 @@ RUN apt update && \
     nano
 
 WORKDIR /home
-RUN git clone https://github.com/tnacho-23/el5206_ws.git
+RUN git clone https://github.com/Felipeipe/el5206_ws.git
 WORKDIR /home/el5206_ws
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
 
