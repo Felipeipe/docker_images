@@ -12,7 +12,10 @@ RUN apt update && \
     curl \
     vim \
     vim-gtk3 \
-    nano
+    nano \
+    python3-pip \
+    python3-tk \
+    python3-pandas
 
 WORKDIR /home
 RUN git clone https://github.com/Felipeipe/el5206_ws.git
