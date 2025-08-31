@@ -1,0 +1,10 @@
+services:
+  cocalc_progra:
+    image: sagemathinc/cocalc-docker:latest
+    container_name: cocalc_progra
+    ports:
+      - "1022:22"
+      - "10443:443"
+      - "1080:80"
+    stdin_open: true
+    tty: true

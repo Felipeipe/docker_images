@@ -1,0 +1,19 @@
+services:
+  comp_int_container:
+    image: pytorch/pytorch:2.8.0-cuda12.9-cudnn9-runtime
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: comp_int_container
+    network_mode: host
+    stdin_open: true
+    tty: true
+    volumes:
+      - ~/Documents/EL4106:/workspace
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+ 
