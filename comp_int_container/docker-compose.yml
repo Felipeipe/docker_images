@@ -1,6 +1,6 @@
 services:
   comp_int_container:
-    image: pytorch/pytorch:2.8.0-cuda12.9-cudnn9-runtime
+    image: comp_int
     build:
       context: .
       dockerfile: Dockerfile

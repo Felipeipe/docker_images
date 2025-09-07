@@ -1,0 +1,2 @@
+ARG BASE_OS=debian:bookworm-slim
+FROM ${BASE_OS}
