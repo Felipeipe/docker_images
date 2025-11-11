@@ -1,0 +1,17 @@
+services:
+  lab_inteligencia:
+    image: lab_inteligencia 
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pioneer 
+    network_mode: host
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+      # - /dev/joy:/dev/joy
+      # - /dev/event_joy:/dev/event_joy
+    environment:
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - CYCLONEDDS_URI=file:///cyclonedds.xml
+    stdin_open: true
+    tty: true
