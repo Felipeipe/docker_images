@@ -30,7 +30,7 @@ RUN git clone https://github.com/reedhedges/AriaCoda.git && \
     git clone -b feat-jazzy https://github.com/uchile-robotics/uchile_navigation.git
 
 WORKDIR /home/bender_ws/src/AriaCoda
-RUN make -j && make install && cd .. && rm -rf AriaCoda
+RUN make && make install && cd .. && rm -rf AriaCoda
 
 
 WORKDIR /home/bender_ws/src
