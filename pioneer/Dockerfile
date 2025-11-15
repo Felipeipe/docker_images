@@ -18,18 +18,17 @@ RUN apt-get update && apt-get full-upgrade -y && \
         ros-dev-tools \
         ros-jazzy-teleop-twist-joy \
         ros-jazzy-joy \
-	ros-jazzy-joy-linux \
+        ros-jazzy-joy-linux \
+        python3.12-venv
 	
 
 WORKDIR /home/bender_ws/src
 RUN git clone https://github.com/reedhedges/AriaCoda.git && \
     git clone https://github.com/ruipaulorocha/rosaria2.git && \
-    git clone --recursive https://github.com/Hokuyo-aut/urg_node2.git && \
     git clone -b ros2 https://github.com/Slamtec/rplidar_ros.git && \
     # Uchile dependencies
     git clone -b feat-jazzy https://github.com/uchile-robotics/bender_bringup.git && \
-    git clone -b feat-jazzy https://github.com/uchile-robotics/bender_core.git && \
-    git clone -b feat-jazzy https://github.com/uchile-robotics/uchile_navigation.git
+    git clone -b feat-jazzy https://github.com/uchile-robotics/bender_core.git
 
 WORKDIR /home/bender_ws/src/AriaCoda
 RUN make && make install && cd .. && rm -rf AriaCoda
@@ -38,7 +37,6 @@ RUN make && make install && cd .. && rm -rf AriaCoda
 WORKDIR /home/bender_ws/src
 RUN rosdep install -i --from-paths . --rosdistro=jazzy -y
 
-RUN sed -i 's/params_ether.yaml/params_serial.yaml/' /home/bender_ws/src/urg_node2/launch/urg_node2.launch.py
 
 WORKDIR /home/bender_ws
 RUN /bin/bash -c "source /opt/ros/jazzy/setup.bash && colcon build --symlink-install"
@@ -49,6 +47,11 @@ RUN echo "source /opt/ros/jazzy/setup.bash" >> /root/.bashrc && \
     apt clean && rm -rf /var/lib/apt/lists/*
 
 COPY config/cyclonedds.xml /
+COPY config/requirements.txt /home/bender_ws/
+
+RUN python3 -m venv venv && \
+    ./venv/bin/activate && \
+    pip install -r requirements.txt
 
 RUN sed -i 's/#PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     echo "root:docker"|chpasswd
