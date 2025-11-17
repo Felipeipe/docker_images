@@ -17,6 +17,10 @@ RUN apt-get update && apt-get full-upgrade -y && \
         ros-jazzy-teleop-twist-joy \
         ros-jazzy-joy \
         ros-jazzy-joy-linux \
+        ros-jazzy-v4l2-camera \
+        v4l-utils \
+	python3-catkin-pkg \
+        ros-jazzy-vision-msgs \
         python3.12-venv
 	
 
