@@ -10,6 +10,7 @@ services:
       - /dev/pioneer:/dev/pioneer
       - /dev/joy:/dev/joy
       - /dev/event_joy:/dev/event_joy
+      - /dev/video0:/dev/video0
     environment:
       - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
       - CYCLONEDDS_URI=file:///cyclonedds.xml

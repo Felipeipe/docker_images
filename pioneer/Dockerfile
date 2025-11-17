@@ -11,9 +11,7 @@ RUN apt-get update && apt-get full-upgrade -y && \
         libboost-dev \
         ros-jazzy-rmw-cyclonedds-cpp \
         ros-jazzy-navigation2 \
-        ros-jazzy-nav2-bringup \
         ros-jazzy-twist-mux \
-        ros-jazzy-cartographer-ros \
         ros-jazzy-tf-transformations \
         ros-dev-tools \
         ros-jazzy-teleop-twist-joy \
@@ -25,10 +23,8 @@ RUN apt-get update && apt-get full-upgrade -y && \
 WORKDIR /home/bender_ws/src
 RUN git clone https://github.com/reedhedges/AriaCoda.git && \
     git clone https://github.com/ruipaulorocha/rosaria2.git && \
-    git clone -b ros2 https://github.com/Slamtec/rplidar_ros.git && \
     # Uchile dependencies
-    git clone -b feat-jazzy https://github.com/uchile-robotics/bender_bringup.git && \
-    git clone -b feat-jazzy https://github.com/uchile-robotics/bender_core.git
+    git clone https://github.com/Felipeipe/proyecto_el5206.git
 
 WORKDIR /home/bender_ws/src/AriaCoda
 RUN make && make install && cd .. && rm -rf AriaCoda
@@ -50,8 +46,10 @@ COPY config/cyclonedds.xml /
 COPY config/requirements.txt /home/bender_ws/
 
 RUN python3 -m venv venv && \
-    ./venv/bin/activate && \
-    pip install -r requirements.txt
+    ./venv/bin/pip install --upgrade pip && \
+    ./venv/bin/pip install -r requirements.txt
+RUN echo "source /home/bender_ws/venv/bin/activate" >> /root/.bashrc
+
 
 RUN sed -i 's/#PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     echo "root:docker"|chpasswd
