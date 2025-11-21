@@ -47,12 +47,7 @@ RUN echo "source /opt/ros/jazzy/setup.bash" >> /root/.bashrc && \
     apt clean && rm -rf /var/lib/apt/lists/*
 
 COPY config/cyclonedds.xml /
-COPY config/requirements.txt /home/bender_ws/
-
-RUN python3 -m venv venv && \
-    ./venv/bin/pip install --upgrade pip && \
-    ./venv/bin/pip install -r requirements.txt
-RUN echo "source /home/bender_ws/venv/bin/activate" >> /root/.bashrc
+RUN pip install ultralytics "numpy<2" --break-system-packages --ignore-installed
 
 
 RUN sed -i 's/#PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
