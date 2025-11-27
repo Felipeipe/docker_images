@@ -6,6 +6,8 @@ services:
       dockerfile: Dockerfile
     container_name: pioneer 
     network_mode: host
+    volumes:
+      - ~/Documents/proyecto_el5206/football_player:/home/bender_ws/src/proyecto_el5206/football_player
     devices:
       - /dev/pioneer:/dev/pioneer
       - /dev/joy:/dev/joy
