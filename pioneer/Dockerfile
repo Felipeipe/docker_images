@@ -23,11 +23,9 @@ RUN apt-get update && apt-get full-upgrade -y && \
         ros-jazzy-vision-msgs \
         python3.12-venv
 	
-
 WORKDIR /home/bender_ws/src
 RUN git clone https://github.com/reedhedges/AriaCoda.git && \
     git clone https://github.com/ruipaulorocha/rosaria2.git && \
-    # Uchile dependencies
     git clone https://github.com/Felipeipe/proyecto_el5206.git
 
 WORKDIR /home/bender_ws/src/AriaCoda
