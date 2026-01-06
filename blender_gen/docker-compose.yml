@@ -1,0 +1,15 @@
+services:
+  bender_core:
+    image: blender_gen
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: blender_gen_container
+    working_dir: /home/amtc_ws
+    volumes:
+      - ~/Documents/data:/home/amtc_ws
+    #   - ~/Documents/mujoco_assets:/home/amtc_ws/mujoco_assets
+    environment:
+      - DISPLAY=":1"
+    stdin_open: true
+    tty: true
