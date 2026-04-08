@@ -1,0 +1,16 @@
+services:
+  navdp:
+    image: navdp:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: navdp
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    working_dir: /NavDP/baselines/navdp
+    stdin_open: true
+    network_mode: host
+    tty: true
+    gpus: all
+    command: python3 navdp_server.py --port 8087 --checkpoint navdp-cross-modal.ckpt

@@ -1,0 +1,14 @@
+services:
+  navdp_bridge:
+    image: navdp_bridge:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: navdp_bridge
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    stdin_open: true
+    network_mode: host
+    tty: true
+    gpus: all
