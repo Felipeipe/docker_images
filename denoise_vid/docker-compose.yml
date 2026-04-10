@@ -1,13 +1,13 @@
 services:
-  blender_gen:
-    image: blender_gen
+  denoise_vid:
+    image: denoise_vid_img
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: blender_gen_container
-    working_dir: /home/amtc_ws
+    container_name: denoise_vid
+    working_dir: /home/ws
     volumes:
-      - ~/Documents/amtc_internship:/home/amtc_ws/test
+      - ~/Documents/test:/home/amtc_ws/test
     stdin_open: true
     tty: true
     gpus: all

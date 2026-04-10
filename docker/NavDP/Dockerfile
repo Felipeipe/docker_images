@@ -18,3 +18,4 @@ WORKDIR /NavDP/baselines/navdp
 
 RUN pip3 install --upgrade pip gdown && pip3 install -r requirements.txt
 RUN gdown 1n4c8UYvryHizy_22e1Z1ABUKrZVVxk7H
+RUN echo "alias c='clear'" >> ~/.bashrc

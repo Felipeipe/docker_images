@@ -1,4 +1,4 @@
-ARG BASE_OS=ubuntu:latest
+ARG BASE_OS=nvcr.io/nvidia/cuda:12.4.1-runtime-ubuntu22.04
 FROM ${BASE_OS}
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y curl git dbus-x11 lxqt-core tigervnc-standalone-server openssh-server vim python3-pip
