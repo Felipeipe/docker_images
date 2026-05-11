@@ -1,0 +1,19 @@
+services:
+  odrive:
+    image: odrive:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - BOARD_VERSION=v3.6-56V
+    container_name: odrive
+    privileged: true          # necesario para tup (FUSE)
+    volumes:
+      - ./build_output:/odrive/Firmware/build   # para sacar el .elf/.hex compilado
+      - /dev/bus/usb:/dev/bus/usb:rslave
+      - /run/udev:/run/udev:ro
+      - ~/uchile_robotics/odrive_ros2_control/tools:/odrive_tools
+      - /tmp/.X11-unix:/tmp/.X11-unix
+
+    stdin_open: true
+    tty: true
