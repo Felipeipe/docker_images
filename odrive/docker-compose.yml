@@ -9,7 +9,6 @@ services:
     container_name: odrive
     privileged: true          # necesario para tup (FUSE)
     volumes:
-      - ./build_output:/odrive/Firmware/build   # para sacar el .elf/.hex compilado
       - /dev/bus/usb:/dev/bus/usb:rslave
       - /run/udev:/run/udev:ro
       - ~/uchile_robotics/odrive_ros2_control/tools:/odrive_tools

@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG BOARD_VERSION=v3.6-56V
@@ -16,24 +16,31 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-is-python3 \
         gcc-arm-none-eabi \
         binutils-arm-none-eabi \
+        libnewlib-arm-none-eabi \
+        libstdc++-arm-none-eabi-newlib \
         libusb-1.0-0-dev \
         openocd \
         tup \
+        fuse3 \
+        git-lfs \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install \
+# Ya no instalamos cantools
+RUN pip install --break-system-packages \
         jinja2 \
         pyyaml \
         jsonschema \
         matplotlib \
         odrive==0.5.4
 
-WORKDIR /odrive
+RUN git clone https://github.com/odriverobotics/ODrive.git
 
-RUN git clone --recursive --branch fw-v0.5.4 \
-        https://github.com/odriverobotics/ODrive.git .
+WORKDIR /ODrive/Firmware
 
-WORKDIR /odrive/Firmware
+# === AQUÍ ESTÁ LA MAGIA ===
+# Borramos la línea del Makefile que intenta ejecutar el script de CAN
+RUN sed -i '/create_can_dbc/d' Makefile
+# ==========================
 
 # Solo preparamos config, la compilación va al CMD
 RUN cp tup.config.default tup.config && \
